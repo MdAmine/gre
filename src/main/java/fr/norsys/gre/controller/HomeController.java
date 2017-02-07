@@ -1,4 +1,4 @@
-package fr.norsys.gre;
+package fr.norsys.gre.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

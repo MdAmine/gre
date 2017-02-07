@@ -1,0 +1,4 @@
+CREATE TABLE EVALUATION (
+     ID INT NOT NULL primary key AUTO_INCREMENT,
+	 TITRE  boolean NOT NULL
+);
