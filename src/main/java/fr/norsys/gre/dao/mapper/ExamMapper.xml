@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.norsys.gre.dao.mapper.ExamMapper">
+
+	<resultMap id="ExamResultMap" type="Exam">
+		<id property="id" column="ID" />
+		<result property="libelle" column="LIBELLE" />
+		<result property="statue" column="STATUE" />
+		<result property="description" column="DESCRIPTION" />
+
+		<association property="createur" column="UTILISATEUR_ID"
+			javaType="Utilisateur" resultMap="utilisateurResultMap" />
+	</resultMap>
+
+	<select id="getById" resultMap="ExamResultMap">
+		SELECT
+		e.ID,
+		e.LIBELLE,
+		u.NOM,
+		u.PRENOM,
+		u.EMAIL,
+		u.LOGIN,
+		u.MOT_DE_PASSE
+		FROM
+		EXAM e
+		LEFT JOIN
+		UTILISATEUR u ON e.UTILISATEUR_ID =
+		u.ID
+		WHERE
+		e.ID =
+		#{id}
+	</select>
+
+	<resultMap id="utilisateurResultMap" type="Utilisateur">
+		<id property="id" column="ID" />
+		<result property="nom" column="NOM" />
+		<result property="prenom" column="PRENOM" />
+		<result property="email" column="EMAIL" />
+		<result property="login" column="LOGIN" />
+		<result property="motDePasse" column="MOT_DE_PASSE" />
+		<!-- <collection property="roles" column="UTILISATEUR_ID" ofType="Role" 
+			resultMap="roleResultMap" /> -->
+	</resultMap>
+
+	<resultMap id="roleResultMap" type="Utilisateur">
+		<id property="id" column="ID" />
+		<result property="libelle" column="LIBELLE" />
+		<result property="description" column="DESCRIPTION" />
+	</resultMap>
+
+</mapper>
