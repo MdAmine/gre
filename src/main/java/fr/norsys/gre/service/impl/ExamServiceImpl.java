@@ -1,4 +1,4 @@
-package fr.norsys.gre.service;
+package fr.norsys.gre.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import fr.norsys.gre.dao.ExamDAO;
 import fr.norsys.gre.exception.TechniqueException;
 import fr.norsys.gre.model.Exam;
+import fr.norsys.gre.service.ExamService;
 
 @Service
 public class ExamServiceImpl implements ExamService {
@@ -17,9 +18,8 @@ public class ExamServiceImpl implements ExamService {
 	public ExamDAO examDAO;
 
 	@Override
-	public List<Exam> getListExam() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Exam> getAll() {
+		return examDAO.getAll();
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import fr.norsys.gre.model.Exam;
 
 public interface ExamService {
 
-	List<Exam> getListExam();
+	List<Exam> getAll();
 
 	/**
 	 * consulter un Exam

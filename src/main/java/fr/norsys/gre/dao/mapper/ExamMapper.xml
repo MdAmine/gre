@@ -3,16 +3,6 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fr.norsys.gre.dao.mapper.ExamMapper">
 
-	<resultMap id="ExamResultMap" type="Exam">
-		<id property="id" column="ID" />
-		<result property="libelle" column="LIBELLE" />
-		<result property="statue" column="STATUE" />
-		<result property="description" column="DESCRIPTION" />
-
-		<association property="createur" column="UTILISATEUR_ID"
-			javaType="Utilisateur" resultMap="utilisateurResultMap" />
-	</resultMap>
-
 	<select id="getById" resultMap="ExamResultMap">
 		SELECT
 		e.ID,
@@ -25,12 +15,36 @@
 		FROM
 		EXAM e
 		LEFT JOIN
-		UTILISATEUR u ON e.UTILISATEUR_ID =
+		UTILISATEUR
+		u ON e.UTILISATEUR_ID =
 		u.ID
 		WHERE
 		e.ID =
 		#{id}
 	</select>
+
+	<select id="getAll" resultMap="ExamResultMap">
+		SELECT
+		e.ID,
+		e.LIBELLE,
+		u.NOM,
+		u.PRENOM
+		FROM
+		EXAM e
+		LEFT JOIN
+		UTILISATEUR u ON e.UTILISATEUR_ID =
+		u.ID
+	</select>
+
+	<resultMap id="ExamResultMap" type="Exam">
+		<id property="id" column="ID" />
+		<result property="libelle" column="LIBELLE" />
+		<result property="statue" column="STATUE" />
+		<result property="description" column="DESCRIPTION" />
+
+		<association property="createur" column="UTILISATEUR_ID"
+			javaType="Utilisateur" resultMap="utilisateurResultMap" />
+	</resultMap>
 
 	<resultMap id="utilisateurResultMap" type="Utilisateur">
 		<id property="id" column="ID" />
@@ -43,7 +57,7 @@
 			resultMap="roleResultMap" /> -->
 	</resultMap>
 
-	<resultMap id="roleResultMap" type="Utilisateur">
+	<resultMap id="roleResultMap" type="Role">
 		<id property="id" column="ID" />
 		<result property="libelle" column="LIBELLE" />
 		<result property="description" column="DESCRIPTION" />

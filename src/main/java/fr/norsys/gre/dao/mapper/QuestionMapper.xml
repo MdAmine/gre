@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.norsys.gre.dao.mapper.QuestionMapper">
+
+	<select id="getAll" resultMap="QuestionResultMap">
+		SELECT
+		q.ID,
+		q.CONTENU,
+		q.NOTE,
+		u.NOM,
+		u.PRENOM,
+		qt.LIBELLE,
+		qt.DESCRIPTION
+		FROM
+		QUESTION q
+		LEFT JOIN
+		UTILISATEUR u
+		ON
+		q.UTILISATEUR_ID =
+		u.ID
+		LEFT JOIN QUESTION_TYPE qt
+		ON
+		q.QUESTION_TYPE_ID = qt.ID
+	</select>
+
+	<select id="getAllQuestionTypes" resultMap="QuestionTypeResultMap">
+		SELECT
+		qt.ID,
+		qt.LIBELLE,
+		qt.DESCRIPTION
+		FROM
+		QUESTION_TYPE qt
+	</select>
+
+	<select id="getById" parameterType="long" resultMap="QuestionResultMap">
+		SELECT
+		q.ID,
+		q.CONTENU,
+		q.NOTE,
+		u.NOM,
+		u.PRENOM,
+		qt.LIBELLE,
+		qt.DESCRIPTION,
+		qc.ID
+		as ID_Choix,
+		qc.CONTENU
+		as CONTENU_Choix,
+		qc.CORRECTE
+		FROM
+		QUESTION
+		q
+		LEFT JOIN
+		UTILISATEUR u
+		ON
+		q.UTILISATEUR_ID =
+		u.ID
+		LEFT JOIN
+		QUESTION_TYPE
+		qt
+		ON
+		q.QUESTION_TYPE_ID =
+		qt.ID
+		LEFT JOIN QUESTION_CHOIX
+		qc
+		ON
+		q.ID =
+		qc.QUESTION_ID
+		WHERE q.ID =
+		#{id}
+
+	</select>
+
+	<select id="findQuestionTypeById" parameterType="long"
+		resultMap="QuestionTypeResultMap">
+		SELECT
+		qt.ID,
+		qt.LIBELLE,
+		qt.DESCRIPTION
+		FROM
+		QUESTION_TYPE qt
+		WHERE qt.ID = #{id}
+	</select>
+
+	<resultMap id="QuestionResultMap" type="Question">
+		<id property="id" column="ID" />
+		<result property="contenu" column="CONTENU" />
+		<result property="note" column="NOTE" />
+		<association property="createur" column="UTILISATEUR_ID"
+			javaType="Utilisateur" resultMap="utilisateurResultMap" />
+		<association property="type" column="QUESTION_TYPE_ID"
+			javaType="QuestionType" resultMap="QuestionTypeResultMap" />
+		<collection property="questionChoix" javaType="java.util.ArrayList"
+			ofType="QuestionChoix" resultMap="QuestionChoixResultMap" />
+	</resultMap>
+
+
+	<resultMap id="QuestionChoixResultMap" type="QuestionChoix">
+		<id property="id" column="ID_Choix" />
+		<result property="contenu" column="CONTENU_Choix" />
+		<result property="correcte" column="CORRECTE" />
+	</resultMap>
+
+
+	<resultMap id="utilisateurResultMap" type="Utilisateur">
+		<id property="id" column="ID" />
+		<result property="nom" column="NOM" />
+		<result property="prenom" column="PRENOM" />
+		<result property="email" column="EMAIL" />
+		<result property="login" column="LOGIN" />
+		<result property="motDePasse" column="MOT_DE_PASSE" />
+	</resultMap>
+
+	<resultMap id="QuestionTypeResultMap" type="QuestionType">
+		<id property="id" column="ID" />
+		<result property="libelle" column="LIBELLE" />
+		<result property="description" column="DESCRIPTION" />
+	</resultMap>
+
+</mapper>

@@ -6,6 +6,6 @@ import fr.norsys.gre.model.Exam;
 
 public interface ExamMapper extends Mapper<Exam> {
 
-	List<Exam> listeExam();
+	List<Exam> getAll();
 
 }

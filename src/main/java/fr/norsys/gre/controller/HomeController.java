@@ -2,6 +2,7 @@ package fr.norsys.gre.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -47,8 +48,11 @@ public class HomeController {
 
 		Optional<Exam> exam = this.examService.getById(Long.parseLong("1"));
 		model.addAttribute("exam", exam.get());
-		
-		System.out.println(exam.get().getCreateur().getNom()); 
+
+		List<Exam> exams = examService.getAll();
+		model.addAttribute("exams", exams);
+
+		System.out.println(exam.get().getCreateur().getNom());
 
 		return "home";
 	}

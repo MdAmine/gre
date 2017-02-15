@@ -27,7 +27,7 @@ public class ExamDAOImpl extends ADAO<Exam> implements ExamDAO {
 
 	@Override
 	public List<Exam> getAll() {
-		return examMapper.listeExam();
+		return examMapper.getAll();
 	}
 
 }

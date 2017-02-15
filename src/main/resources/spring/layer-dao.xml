@@ -33,7 +33,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="fr.norsys.gre.model" />
 		<property name="mapperLocations"
-			value="classpath*:fr.norsys.gestionEtude.dao.mapper/**/*.xml" />
+			value="classpath*:fr.norsys.gre.dao.mapper/**/*.xml" />
 		<property name="typeHandlersPackage" value="fr.norsys.gre.dao.typehandler" />
 	</bean>
 

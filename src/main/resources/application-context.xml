@@ -10,19 +10,17 @@
 	<import resource="classpath:spring/layer-service.xml" />
 	<context:component-scan base-package="fr.norsys.gre.controller" />
 
-
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
-
 	<bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".html" />
 		<property name="templateMode" value="HTML5" />
-		<!-- Template cache is true by default. Set to false if you want -->
-		<!-- templates to be automatically updated when modified. -->
+		<!-- Template cache is true by default. Set to false if you want templates 
+			to be automatically updated when modified. -->
 		<property name="cacheable" value="false" />
 	</bean>
 
