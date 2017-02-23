@@ -3,12 +3,15 @@ package fr.norsys.gre.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.norsys.gre.exception.TechniqueException;
@@ -27,7 +30,7 @@ public class QuestionController {
 	@RequestMapping("/")
 	public String questionIndex(Model model) {
 
-		List<Question> questions = questionService.getAll();
+		List<Question> questions = this.questionService.getAll();
 
 		model.addAttribute("questions", questions);
 
@@ -35,19 +38,53 @@ public class QuestionController {
 	}
 
 	@RequestMapping("/add")
-	public String questionAdd(Model model) {
+	public String questionAddForm(Model model) {
 
 		Question question = new Question();
 
+		QuestionChoix qc = new QuestionChoix();
+		qc.setContenu("bla bla");
+
+		List<QuestionChoix> list = new ArrayList<QuestionChoix>();
+		list.add(qc);
+		question.setQuestionChoix(list);
+
+		question.setContenu("aaa aaaaa");
 		model.addAttribute("question", question);
 
+		return "question/add";
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String questionAdd(Model model, @ModelAttribute("question") Question question) {
+		System.out.println("id : " + question.getType().getId());
+
+		for (QuestionChoix qc : question.getQuestionChoix()) {
+			System.out.println(qc.isCorrecte() + " - " + qc.getContenu());
+		}
+
+		return "question/index";
+	}
+
+	@RequestMapping(value = "/add", params = { "addRow" })
+	public String addRow(@ModelAttribute("question") Question question) {
+		System.out.println("contenu : " + question.getContenu());
+		question.getQuestionChoix().add(new QuestionChoix());
+		return "question/add";
+	}
+
+	@RequestMapping(value = "/add", params = { "removeRow" })
+	public String removeRow(Question question, final HttpServletRequest req) {
+
+		final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+		question.getQuestionChoix().remove(rowId.intValue());
 		return "question/add";
 	}
 
 	@RequestMapping("/{id}")
 	public String questionShow(Model model, @PathVariable("id") Long id) throws TechniqueException {
 
-		Question question = questionService.getById(id).get();
+		Question question = this.questionService.getById(id).get();
 
 		model.addAttribute("question", question);
 
@@ -60,13 +97,11 @@ public class QuestionController {
 	@RequestMapping("/ajax/show_question_reponses_area")
 	public String showSubQuestionAreaAjaxHandler(Model model, @RequestParam(required = true) Long questionTypeId) {
 
-		QuestionType questionType = questionService.findQuestionTypeById(questionTypeId).get();
+		QuestionType questionType = this.questionService.findQuestionTypeById(questionTypeId).get();
 
 		if ("SC".equalsIgnoreCase(questionType.getLibelle())) {
 			return "question/ajax/SC_area";
 		} else if ("MC".equalsIgnoreCase(questionType.getLibelle())) {
-			Question question = new Question();
-			question.setQuestionChoix(new ArrayList<QuestionChoix>());
 			return "question/ajax/MC_area";
 		} else {
 			return "question/ajax/SC_area";
@@ -75,7 +110,7 @@ public class QuestionController {
 
 	@ModelAttribute("questionTypes")
 	public List<QuestionType> getAllQuestionTypes() {
-		return questionService.getAllQuestionTypes();
+		return this.questionService.getAllQuestionTypes();
 	}
 
 }

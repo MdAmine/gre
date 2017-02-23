@@ -34,10 +34,10 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2 col-sm-offset-1" for="type">Type</label>
 				<div class="col-sm-6">
-					<select th:field="*{type}" class="form-control">
+					<select th:field="*{type.id}" id="type" class="form-control">
 						<option value="0">--- Select ---</option>
-						<option th:each="type : ${questionTypes}" th:value="${type.id}"
-							th:text="${type.libelle}">type de question</option>
+						<option th:each="t : ${questionTypes}" th:value="${t.id}"
+							th:text="${t.libelle}">type de question</option>
 					</select>
 				</div>
 			</div>
@@ -48,7 +48,29 @@
 				</div>
 			</div>
 
-			<div id="question_reponses_container"></div>
+
+
+			<div class="form-group">
+				<div class="col-sm-offset-7">
+					<button type="submit" name="addRow" class="btn btn-default">Ajouter
+						une réponse</button>
+				</div>
+			</div>
+
+
+			<div th:each="qc,qcStat : *{questionChoix}" class=" form-group">
+				<label class="control-label col-sm-1 col-sm-offset-2"> <input
+					value="true" type="checkbox"
+					th:field="*{questionChoix[__${qcStat.index}__].correcte}"></label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" name="qc.contenu"
+						th:field="*{questionChoix[__${qcStat.index}__].contenu}" />
+				</div>
+				<div class="col-sm-1">
+					<button type="submit" name="removeRow" th:value="${qcStat.index}"
+						class="btn btn-danger">Remove</button>
+				</div>
+			</div>
 
 
 			<div class="form-group">
@@ -56,7 +78,10 @@
 					<button type="submit" class="btn btn-default">Submit</button>
 				</div>
 			</div>
+
 		</form>
+
+
 	</div>
 
 	<script type="text/javascript"
@@ -66,46 +91,6 @@
 	<script type="text/javascript"
 		src="../../resources/js/bootstrap.min.js"
 		th:src="@{/resources/js/bootstrap.min.js}"></script>
-
-
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function() {
-
-			questionTypeChanged();
-
-			$("#type").on("change", function() {
-				showSubQuestionArea($(this).val());
-			});
-
-		});
-
-		function questionTypeChanged() {
-			var questionTypeId = $('#type').val();
-			if (questionTypeId == 0) {
-				$('#question_reponses_container').html('');
-			} else {
-				showSubQuestionArea(questionTypeId);
-			}
-		};
-
-		function showSubQuestionArea(questionTypeId) {
-			if (questionTypeId == 0) {
-				$('#question_reponses_container').html('');
-			} else {
-				$.ajax({
-					url : '/gre/question/ajax/show_question_reponses_area',
-					data : {
-						questionTypeId : questionTypeId
-					},
-					type : 'get',
-					cache : false,
-					success : function(response, textStatus, xhr) {
-						$('#question_reponses_container').html(response);
-					}
-				});
-			}
-		};
-	</script>
 
 
 </body>

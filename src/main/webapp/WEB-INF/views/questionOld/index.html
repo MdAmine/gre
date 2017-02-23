@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Home</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+
+
+<!-- Custom CSS -->
+<link href="../../resources/css/navbar.css" rel="stylesheet"
+	th:href="@{/resources/css/navbar.css}" type="text/css" />
+
+</head>
+<body>
+
+	<div th:replace="navbar :: navbar"></div>
+
+
+	<div class="container">
+
+
+		<h2>La liste des questions</h2>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Contenu</th>
+					<th>Note</th>
+					<th>Type</th>
+					<th>Créé par</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="question : ${questions}">
+					<td th:text="${question.id}"></td>
+					<td th:text="${question.contenu}"></td>
+					<td th:text="${question.note}"></td>
+					<td th:text="${question.type.description}"></td>
+					<td th:text="${question.createur.nom}"></td>
+					<td><a th:href="@{'/question/'+${question.id}}">voir</a> <a
+						href="#">modifier</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<a class="btn btn-primary" th:href="@{/question/add}"> Ajouter </a>
+
+	</div>
+
+
+	<script type="text/javascript"
+		src="../../resources/js/jquery-3.1.1.min.js"
+		th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+
+

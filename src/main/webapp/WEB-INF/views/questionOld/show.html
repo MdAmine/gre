@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Home</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+
+
+<!-- Custom CSS -->
+<link href="../../resources/css/navbar.css" rel="stylesheet"
+	th:href="@{/resources/css/navbar.css}" type="text/css" />
+
+</head>
+<body>
+
+	<div th:replace="navbar :: navbar"></div>
+
+	<div class="container">
+
+		<h2>
+			ID question : <span th:text="${question.id}"></span>
+		</h2>
+		<h4>
+			Contenu : <span th:text="${question.contenu}"></span>
+		</h4>
+		<h4>
+			Note : <span th:text="${question.note}"></span>
+		</h4>
+		<h4>
+			Type : <span
+				th:text="${question.type.libelle +' - '+ question.type.description}"></span>
+		</h4>
+		<h4>
+			Créé par : <span th:text="${question.createur.nom}"></span>
+		</h4>
+		<h2>Les choix de réponse :</h2>
+
+		<div th:each="qc : ${question.questionChoix}">
+			<span th:text="${qc.contenu}"></span> - <span
+				th:text="${qc.correcte}"></span>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript"
+		src="../../resources/js/jquery-3.1.1.min.js"
+		th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+
+

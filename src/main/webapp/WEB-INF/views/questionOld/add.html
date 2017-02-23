@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Home</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+
+
+<!-- Custom CSS -->
+<link href="../../resources/css/navbar.css" rel="stylesheet"
+	th:href="@{/resources/css/navbar.css}" type="text/css" />
+
+</head>
+<body>
+
+	<div th:replace="navbar :: navbar"></div>
+
+	<h2>Ajouter une question</h2>
+	<div class="container">
+
+		<form class="form-horizontal" action="#" th:action="@{/question/add}"
+			th:object="${question}" method="post">
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">Contenu
+					:</label>
+				<div class="col-sm-6">
+					<textarea class="form-control" th:field="*{contenu}"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1" for="type">Type</label>
+				<div class="col-sm-6">
+					<select th:field="*{type.id}" id="type" class="form-control">
+						<option value="0">--- Select ---</option>
+						<option th:each="t : ${questionTypes}" th:value="${t.id}"
+							th:text="${t.libelle}">type de question</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">Note :</label>
+				<div class="col-sm-6">
+					<input type="number" class="form-control" th:field="*{note}" />
+				</div>
+			</div>
+
+			<div id="question_reponses_container"></div>
+
+
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-6">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</div>
+
+
+		</form>
+
+
+	</div>
+
+	<script type="text/javascript"
+		src="../../resources/js/jquery-3.1.1.min.js"
+		th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+
+			questionTypeChanged();
+
+			$("#type").on("change", function() {
+				showSubQuestionArea($(this).val());
+			});
+
+		});
+
+		function questionTypeChanged() {
+			var questionTypeId = $('#type').val();
+			if (questionTypeId == 0) {
+				$('#question_reponses_container').html('');
+			} else {
+				showSubQuestionArea(questionTypeId);
+			}
+		};
+
+		function showSubQuestionArea(questionTypeId) {
+			if (questionTypeId == 0) {
+				$('#question_reponses_container').html('');
+			} else {
+				$.ajax({
+					url : '/gre/question/ajax/show_question_reponses_area',
+					data : {
+						questionTypeId : questionTypeId
+					},
+					type : 'get',
+					cache : false,
+					success : function(response, textStatus, xhr) {
+						$('#question_reponses_container').html(response);
+					}
+				});
+			}
+		};
+	</script>
+
+
+</body>
+</html>
+
+
