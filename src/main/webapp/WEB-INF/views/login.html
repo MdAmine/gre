@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Home</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+
+<!-- Custom CSS -->
+<link href="../../resources/css/navbar.css" rel="stylesheet"
+	th:href="@{/resources/css/navbar.css}" type="text/css" />
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+</head>
+<body>
+
+	<div class="container">
+
+		<h1>Login</h1>
+
+		<form class="form-horizontal" id="form" action="#"
+			th:action="@{/login}" method="POST">
+			<div class="form-group">
+				<label for="make">Email</label> <input name="login"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="model">Password</label> <input type="password"
+					name="password" class="form-control" />
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+
+	</div>
+
+
+	<script type="text/javascript"
+		src="../../resources/js/jquery-3.1.1.min.js"
+		th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
+
+

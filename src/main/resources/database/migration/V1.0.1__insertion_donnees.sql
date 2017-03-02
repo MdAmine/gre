@@ -1,5 +1,5 @@
 insert into UTILISATEUR (NOM,PRENOM,EMAIL,LOGIN,MOT_DE_PASSE)
-				values('amine','md','amine@md.com','a','a');
+				values('amine','md','a@a.a','a','a');
 
 insert into ROLE (LIBELLE)
 				values('ADMIN');						  
@@ -22,6 +22,56 @@ insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
 				values('ou se trouve la ville Marrakech',1,1,2);
 insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
 				values('2+2',1,1,1);
+				
+				
+				
+				
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('amine 2',1,1,2);
+				
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 1',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				insert into QUESTION (CONTENU,NOTE,UTILISATEUR_ID,QUESTION_TYPE_ID)
+				values('mohamed 2',1,1,2);
+				
+				
+				
+				
+				
+				
+				
+				
+				
 					
 insert into EXAM_QUESTION (EXAM_ID,QUESTION_ID)
 				values(1,1);			

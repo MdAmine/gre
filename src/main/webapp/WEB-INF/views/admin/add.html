@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Home</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+
+
+<!-- Custom CSS -->
+<link href="../../resources/css/navbar.css" rel="stylesheet"
+	th:href="@{/resources/css/navbar.css}" type="text/css" />
+
+</head>
+<body>
+
+	<div th:replace="navbar :: navbar"></div>
+
+	<h2>Ajouter une question</h2>
+	<div class="container">
+
+		<form class="form-horizontal" action="#" th:action="@{/admin/add}"
+			th:object="${utilisateur}" method="post">
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">Nom :</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" th:field="*{nom}"></input>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">Prenom
+					:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" th:field="*{prenom}"></input>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">Email
+					:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" th:field="*{email}"></input>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">Login
+					:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" th:field="*{login}"></input>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-sm-offset-1">mot de
+					passe :</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" th:field="*{motDePasse}"></input>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-6">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</div>
+
+		</form>
+
+
+	</div>
+
+	<script type="text/javascript"
+		src="../../resources/js/jquery-3.1.1.min.js"
+		th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+
+</body>
+</html>
+
+

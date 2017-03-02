@@ -20,22 +20,22 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public List<Question> getAll() {
-		return questionDAO.getAll();
+		return this.questionDAO.getAll();
 	}
 
 	@Override
 	public Optional<Question> getById(Long id) throws TechniqueException {
-		return questionDAO.getById(id);
+		return this.questionDAO.getById(id);
 	}
 
 	@Override
 	public List<QuestionType> getAllQuestionTypes() {
-		return questionDAO.getAllQuestionTypes();
+		return this.questionDAO.getAllQuestionTypes();
 	}
 
 	@Override
 	public Optional<QuestionType> findQuestionTypeById(Long id) {
-		return questionDAO.findQuestionTypeById(id);
+		return this.questionDAO.findQuestionTypeById(id);
 	}
 
 }

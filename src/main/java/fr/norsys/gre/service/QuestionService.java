@@ -17,12 +17,11 @@ public interface QuestionService {
 
 	/**
 	 * consulter une question
-	 * 
+	 *
 	 * @param id
 	 *            l'id de la question
 	 * @return
 	 * @throws TechniqueException
 	 */
 	Optional<Question> getById(Long id) throws TechniqueException;
-
 }

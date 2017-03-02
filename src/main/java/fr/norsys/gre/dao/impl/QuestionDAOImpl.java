@@ -29,17 +29,18 @@ public class QuestionDAOImpl extends ADAO<Question> implements QuestionDAO {
 
 	@Override
 	public List<Question> getAll() {
-		return questionMapper.getAll();
+		return this.questionMapper.getAll();
 	}
 
 	@Override
 	public List<QuestionType> getAllQuestionTypes() {
-		return questionMapper.getAllQuestionTypes();
+		return this.questionMapper.getAllQuestionTypes();
 	}
 
+	@Override
 	public Optional<QuestionType> findQuestionTypeById(Long id) {
 
-		QuestionType qt = questionMapper.findQuestionTypeById(id);
+		QuestionType qt = this.questionMapper.findQuestionTypeById(id);
 		return Optional.ofNullable(qt);
 
 	}

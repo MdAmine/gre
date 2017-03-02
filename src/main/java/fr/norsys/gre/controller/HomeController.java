@@ -31,7 +31,7 @@ public class HomeController {
 
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 * 
+	 *
 	 * @throws TechniqueException
 	 * @throws NumberFormatException
 	 */
@@ -49,12 +49,17 @@ public class HomeController {
 		Optional<Exam> exam = this.examService.getById(Long.parseLong("1"));
 		model.addAttribute("exam", exam.get());
 
-		List<Exam> exams = examService.getAll();
+		List<Exam> exams = this.examService.getAll();
 		model.addAttribute("exams", exams);
 
 		System.out.println(exam.get().getCreateur().getNom());
 
 		return "home";
+	}
+
+	@RequestMapping("/login-form")
+	public String login() {
+		return "login";
 	}
 
 }

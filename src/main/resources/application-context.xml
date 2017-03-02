@@ -8,6 +8,7 @@
 
 
 	<import resource="classpath:spring/layer-service.xml" />
+	<import resource="classpath:spring/security.xml" />
 	<context:component-scan base-package="fr.norsys.gre.controller" />
 
 	<mvc:annotation-driven />
@@ -30,6 +31,8 @@
 			<set>
 				<bean
 					class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect" />
+				<!-- <bean class="com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect" 
+					/> -->
 			</set>
 		</property>
 	</bean>

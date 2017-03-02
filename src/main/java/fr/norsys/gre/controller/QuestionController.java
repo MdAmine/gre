@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.norsys.gre.exception.TechniqueException;
 import fr.norsys.gre.model.Question;
@@ -43,13 +43,13 @@ public class QuestionController {
 		Question question = new Question();
 
 		QuestionChoix qc = new QuestionChoix();
-		qc.setContenu("bla bla");
-
+		// qc.setContenu("bla bla");
+		//
 		List<QuestionChoix> list = new ArrayList<QuestionChoix>();
 		list.add(qc);
 		question.setQuestionChoix(list);
 
-		question.setContenu("aaa aaaaa");
+		// question.setContenu("aaa aaaaa");
 		model.addAttribute("question", question);
 
 		return "question/add";
@@ -94,23 +94,14 @@ public class QuestionController {
 		return "question/show";
 	}
 
-	@RequestMapping("/ajax/show_question_reponses_area")
-	public String showSubQuestionAreaAjaxHandler(Model model, @RequestParam(required = true) Long questionTypeId) {
-
-		QuestionType questionType = this.questionService.findQuestionTypeById(questionTypeId).get();
-
-		if ("SC".equalsIgnoreCase(questionType.getLibelle())) {
-			return "question/ajax/SC_area";
-		} else if ("MC".equalsIgnoreCase(questionType.getLibelle())) {
-			return "question/ajax/MC_area";
-		} else {
-			return "question/ajax/SC_area";
-		}
-	}
-
 	@ModelAttribute("questionTypes")
 	public List<QuestionType> getAllQuestionTypes() {
 		return this.questionService.getAllQuestionTypes();
+	}
+
+	@RequestMapping(value = "/questionDatatable")
+	public @ResponseBody List<Question> findAll() {
+		return this.questionService.getAll();
 	}
 
 }

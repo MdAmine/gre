@@ -43,7 +43,8 @@
 		qt.LIBELLE,
 		qt.DESCRIPTION,
 		qc.ID
-		as ID_Choix,
+		as
+		ID_Choix,
 		qc.CONTENU
 		as CONTENU_Choix,
 		qc.CORRECTE

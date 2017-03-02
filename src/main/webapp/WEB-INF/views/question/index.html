@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 
 <head>
 
@@ -14,6 +15,13 @@
 <link href="../../resources/css/navbar.css" rel="stylesheet"
 	th:href="@{/resources/css/navbar.css}" type="text/css" />
 
+<link href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"
+	rel="stylesheet"
+	th:href="@{//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css}"
+	type="text/css" />
+
+
+
 </head>
 <body>
 
@@ -25,7 +33,7 @@
 
 		<h2>La liste des questions</h2>
 
-		<table class="table">
+		<table class="table stripe" id="myTable">
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -54,13 +62,24 @@
 	</div>
 
 
+
 	<script type="text/javascript"
-		src="../../resources/js/jquery-3.1.1.min.js"
-		th:src="@{/resources/js/jquery-3.1.1.min.js}"></script>
+		src="https://code.jquery.com/jquery-1.12.4.js"
+		th:src="@{https://code.jquery.com/jquery-1.12.4.js}"></script>
 
 	<script type="text/javascript"
 		src="../../resources/js/bootstrap.min.js"
 		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+	<script type="text/javascript"
+		src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"
+		th:src="@{//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#myTable').DataTable();
+		});
+	</script>
+
 
 </body>
 </html>

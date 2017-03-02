@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.norsys.gre.dao.mapper.UtilisateurMapper">
+
+	<select id="findByEmail" parameterType="String" resultMap="utilisateurResultMap">
+		SELECT
+		*
+		FROM
+		UTILISATEUR
+		WHERE email =
+		#{email}
+	</select>
+
+
+	<insert id="create" parameterType="Utilisateur" statementType="PREPARED">
+		insert into UTILISATEUR (nom,prenom,email,login,mot_de_passe)
+		values
+		(#{nom},#{prenom},#{email},#{login},#{motDePasse})
+	</insert>
+
+	<select id="getAll" resultMap="utilisateurResultMap">
+		SELECT
+		*
+		FROM
+		UTILISATEUR
+	</select>
+
+	<select id="getById" parameterType="long" resultMap="utilisateurResultMap">
+		SELECT
+		*
+		FROM
+		UTILISATEUR
+		WHERE q.ID =
+		#{id}
+	</select>
+
+
+	<resultMap id="utilisateurResultMap" type="Utilisateur">
+		<id property="id" column="ID" />
+		<result property="nom" column="NOM" />
+		<result property="prenom" column="PRENOM" />
+		<result property="email" column="EMAIL" />
+		<result property="login" column="LOGIN" />
+		<result property="motDePasse" column="MOT_DE_PASSE" />
+	</resultMap>
+
+</mapper>
